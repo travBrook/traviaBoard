@@ -1,0 +1,5 @@
+
+
+model holds an array of tiles or map?
+-Tiles are the "answers"
+
