@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QHBoxLayout, QGridLayout, QVBoxLayout
 triviaInfo = {}
 doubleTriviaInfo = {}
 catColumns = {}
+doubleCatColumns = {}
 
 __version__ = '0.1'
 
@@ -133,19 +134,37 @@ def populateData(inputFile):
             pass
         elif count == 1 : 
             categories = ast.literal_eval(line)
-            for cat in categories : 
-                triviaInfo[cat] = []
+
+            for count2, cat in enumerate(categories): 
+                if count2 <= 5 :
+                    triviaInfo[cat] = []
+                else :
+                    doubleTriviaInfo[cat] = []
+
         else : 
-            clueInfo = line.split("  8==D  ")
-            theCat = clueInfo[2]
-            x = clueInfo[0]
-            y = clueInfo[1]
-            clue = clueInfo[3]
-            ans = clueInfo[4]
-            triviaInfo[theCat].append((x,y,clue,ans))
-            if x not in catColumns.keys() : 
-                print(x)
-                catColumns[x] = theCat
+            #Separate double jeopardy
+            if count >= 33 : 
+                clueInfo = line.split("  8==D  ")
+                theCat = clueInfo[2]
+                x = clueInfo[0]
+                y = clueInfo[1]
+                clue = clueInfo[3]
+                ans = clueInfo[4]
+                doubleTriviaInfo[theCat].append((x,y,clue,ans))
+                if x not in doubleCatColumns.keys() : 
+                    print(x)
+                    doubleCatColumns[x] = theCat
+            else : 
+                clueInfo = line.split("  8==D  ")
+                theCat = clueInfo[2]
+                x = clueInfo[0]
+                y = clueInfo[1]
+                clue = clueInfo[3]
+                ans = clueInfo[4]
+                triviaInfo[theCat].append((x,y,clue,ans))
+                if x not in catColumns.keys() : 
+                    print(x)
+                    catColumns[x] = theCat
             
 
 # Client code
