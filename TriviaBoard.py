@@ -27,7 +27,7 @@ class TriviaBoardUi(QMainWindow):
         # Set the central widget
         self._centralWidget = QWidget(self)
         self.setCentralWidget(self._centralWidget)
-        self.setStyleSheet('background-color : red')
+        self.setStyleSheet('background-color : black')
         # Set layouts of different parts
         self.generalLayout = QVBoxLayout()
         
@@ -50,7 +50,7 @@ class TriviaBoardUi(QMainWindow):
             theLabel.setFrameShape(QFrame.Box)
             theLabel.setLineWidth(2)
             theLabel.setFixedSize(150, 100)
-            theLabel.setStyleSheet('background-color : blue')
+            theLabel.setStyleSheet('background-color : blue; color : yellow')
             categoriesLayout.insertWidget(int(clues[0][0]), theLabel)
             self.categories[category] = theLabel
         
