@@ -1,3 +1,4 @@
 Dependencies : 
 + pyqt5 (pip install pyqt5)
 
+":wq" merge screen (git)

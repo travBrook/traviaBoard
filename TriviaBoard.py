@@ -32,7 +32,7 @@ class TriviaBoardUi(QMainWindow):
         self.generalLayout = QVBoxLayout()
         
         self.createCategories()
-        #self.createClues()
+        self.createClues()
 
         self._centralWidget.setLayout(self.generalLayout)
 
@@ -62,59 +62,59 @@ class TriviaBoardUi(QMainWindow):
         self.clues = {}
         clueLayout = QGridLayout()
         # Button text | position (x,y) 
-        buttons = {
+        buttons = [
             #Col 1
-            '200': (0, 0),
-            '400': (0, 1),
-            '600': (0, 2),
-            '800': (0, 3),
-            '1000': (0, 4),
+            ('200', (0, 0)),
+            ('400', (0, 1)),
+            ('600', (0, 2)),
+            ('800', (0, 3)),
+            ('1000', (0, 4)),
             #Col 2
-            '200': (1, 0),
-            '400': (1, 1),
-            '600': (1, 2),
-            '800': (1, 3),
-            '1000': (1, 4),
+            ('200', (1, 0)),
+            ('400', (1, 1)),
+            ('600', (1, 2)),
+            ('800', (1, 3)),
+            ('1000', (1, 4)),
             #Col 3
-            '200': (2, 0),
-            '400': (2, 1), 
-            '600': (2, 2),
-            '800': (2, 3),
-            '1000': (2, 4),
+            ('200', (2, 0)),
+            ('400', (2, 1)), 
+            ('600', (2, 2)),
+            ('800', (2, 3)),
+            ('1000', (2, 4)),
             #Col 4
-            '200': (3, 0),
-            '400': (3, 1),
-            '600': (3, 2),
-            '800': (3, 3),
-            '1000': (3, 4),
+            ('200', (3, 0)),
+            ('400', (3, 1)),
+            ('600', (3, 2)),
+            ('800', (3, 3)),
+            ('1000', (3, 4)),
             #Col 5
-            '200': (4, 0),
-            '400': (4, 1),
-            '600': (4, 2),       
-            '800': (4, 3),
-            '1000': (4, 4),
+            ('200', (4, 0)),
+            ('400', (4, 1)),
+            ('600', (4, 2)),       
+            ('800', (4, 3)),
+            ('1000', (4, 4)),
             #Col 6
-            '200': (5, 0),
-            '200': (5, 1),
-            '200': (5, 2),
-            '200': (5, 3),
-            '200': (5, 4),
-        }
+            ('200', (5, 0)),
+            ('400', (5, 1)),
+            ('600', (5, 2)),
+            ('800', (5, 3)),
+            ('1000', (5, 4)),
+        ]
         # Create the buttons and add them to the grid layout
-        for btnText, pos in buttons.items():
+        for btn in buttons:
             #TUPLE that holds (button, (x,y,clue,ans)) (should probably make clue object)
-            theCat = catColumns[pos[0]+1]
+            theCat = catColumns[str(btn[1][0]+1)]
             theClue = []
             for clue in triviaInfo[theCat] : 
-                if (pos[1]+1) == clue[1] : 
+                if (btn[1][1]+1) == clue[1] : 
                     theClue = clue
                     break
-            self.clues[pos] = (QPushButton(btnText), theClue)  
-            theButton = self.clues[pos][0]
+            self.clues[btn[1]] = (QPushButton(btn[0]), theClue)  
+            theButton = self.clues[btn[1]][0]
             theButton.setFixedSize(150, 100)
             theButton.setStyleSheet('background-color : blue; color : yellow')
 
-            clueLayout.addWidget(theButton, pos[1], pos[0]) #NOTICE the y, x positioning
+            clueLayout.addWidget(theButton, btn[1][1], btn[1][0]) #NOTICE the y, x positioning
 
         # Add buttonsLayout to the general layout
         self.generalLayout.addLayout(clueLayout)
@@ -152,7 +152,6 @@ def populateData(inputFile):
                 ans = clueInfo[4]
                 doubleTriviaInfo[theCat].append((x,y,clue,ans))
                 if x not in doubleCatColumns.keys() : 
-                    print(x)
                     doubleCatColumns[x] = theCat
             else : 
                 clueInfo = line.split("  8==D  ")
@@ -163,7 +162,6 @@ def populateData(inputFile):
                 ans = clueInfo[4]
                 triviaInfo[theCat].append((x,y,clue,ans))
                 if x not in catColumns.keys() : 
-                    print(x)
                     catColumns[x] = theCat
             
 
