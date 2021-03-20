@@ -2,3 +2,8 @@ Dependencies :
 + pyqt5 (pip install pyqt5)
 
 ":wq" merge screen (git)
+
+
+Everything is a widget in pyqt. 
+For altering traits, you may want to start there. For example :  
+Or start at your specific widget and follow its inheritance back to where it all began

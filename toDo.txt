@@ -1,0 +1,16 @@
++change font sizes
++center category labels
++have picture background behind black background
++show clue on click
++make clue button disappear after showing it?
++add double jep
+
+
+
+RESOURCES
+***Been modelling design after last example shown in this article (MVC pycalc)***
+https://realpython.com/python-pyqt-gui-calculator/
+***Jep board***
+https://www.google.com/search?q=jeopardy+board&rlz=1C1CHBF_enUS809US809&sxsrf=ALeKk01D3ZhOHUJCmumfc1H76FhCxeFbtA:1615850845217&source=lnms&tbm=isch&biw=1366&bih=657#imgrc=XGAnyDl1ZPUnKM
+***PyQT qwidget ref***
+https://doc.qt.io/qt-5/qwidget.html
