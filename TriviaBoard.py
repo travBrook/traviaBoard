@@ -2,6 +2,8 @@
 
 import sys, ast, pdb
 
+import Clue
+
 # Import QApplication and the required widgets from PyQt5.QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QFrame, QPushButton
 from PyQt5.QtWidgets import QHBoxLayout, QGridLayout, QVBoxLayout
@@ -51,7 +53,7 @@ class TriviaBoardUi(QMainWindow):
             theLabel.setLineWidth(2)
             theLabel.setFixedSize(150, 100)
             theLabel.setStyleSheet('background-color : blue; color : yellow')
-            categoriesLayout.insertWidget(int(clues[0][0]), theLabel)
+            categoriesLayout.insertWidget(int(clues[0].getX()), theLabel)
             self.categories[category] = theLabel
         
         self.generalLayout.addLayout(categoriesLayout)
@@ -106,7 +108,7 @@ class TriviaBoardUi(QMainWindow):
             theCat = catColumns[str(btn[1][0]+1)]
             theClue = []
             for clue in triviaInfo[theCat] : 
-                if (btn[1][1]+1) == clue[1] : 
+                if (btn[1][1]+1) == clue.getY() : 
                     theClue = clue
                     break
             self.clues[btn[1]] = (QPushButton(btn[0]), theClue)  
@@ -147,20 +149,28 @@ def populateData(inputFile):
                 clueInfo = line.split("  8==D  ")
                 theCat = clueInfo[2]
                 x = clueInfo[0]
+
+                '''
                 y = clueInfo[1]
                 clue = clueInfo[3]
                 ans = clueInfo[4]
-                doubleTriviaInfo[theCat].append((x,y,clue,ans))
+                '''
+                theClue = Clue.Clue(x, clueInfo[1], clueInfo[3], clueInfo[4], theCat)
+                doubleTriviaInfo[theCat].append(theClue)
                 if x not in doubleCatColumns.keys() : 
                     doubleCatColumns[x] = theCat
             else : 
                 clueInfo = line.split("  8==D  ")
                 theCat = clueInfo[2]
                 x = clueInfo[0]
+
+                '''
                 y = clueInfo[1]
                 clue = clueInfo[3]
                 ans = clueInfo[4]
-                triviaInfo[theCat].append((x,y,clue,ans))
+                '''
+                theClue = Clue.Clue(x, clueInfo[1], clueInfo[3], clueInfo[4], theCat)
+                triviaInfo[theCat].append(theClue)
                 if x not in catColumns.keys() : 
                     catColumns[x] = theCat
             
